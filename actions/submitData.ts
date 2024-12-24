@@ -1,6 +1,6 @@
 "use server";
 import { ProfileSchema, ProfileValue } from '@/lib/validations';
-
+import { revalidatePath } from 'next/cache';
 
 
 
@@ -49,6 +49,9 @@ export async function submitProfile(prevState: ActionResponse | null, formData: 
       success: false,
       message: `Profile submission error: ${error}`,
     }
+  }
+  finally {
+    revalidatePath('/')
   }
 }
 

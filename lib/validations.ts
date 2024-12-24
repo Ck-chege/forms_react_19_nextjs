@@ -10,9 +10,9 @@ export const ProfileSchema = z.object({
 
 
     // Personal Information    
-    id: stringValue,
-    name: stringValue,
-    role: stringValue,
+    id: z.string().min(1, 'ID is required'),
+    name: z.string().min(1, 'Name is required'),
+    role: z.string().min(1, 'Role is required'),
     image: z.custom<File | string>()
     .refine((file) => {
         if (typeof file === 'string') return true; // Allow existing image URLs
